@@ -1,14 +1,22 @@
-Local Setup Instructions:
+## Local Setup Instructions:
 
-1)mvn clean install
-2)cd ui && npm install && npm run build
+1)'mvn clean install'
+
+2)'cd ui && npm install && npm run build'
 
 3)make sure you are in root directory 'rush'
-4)docker build -t thescore-rush .
-5)docker run -p8080:8089 thescore-rush
-6)on browser, hit http:localhost:8080/
 
-Welcome to...The rush!
+4)'docker build -t thescore-rush .'
+
+5)'docker run -p8080:8089 thescore-rush'
+
+6)in browser - hit localhost:8080/
+
+
+
+## Welcome to...The rush!
+
+### Description:
 
 The application will automatically load the provided rushing.json file (can be found in the resource folder.
 It will provide 10 players per page (passed from the UI).

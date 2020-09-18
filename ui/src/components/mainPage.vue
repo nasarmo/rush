@@ -117,7 +117,8 @@
       <div class="text-center">
           <v-pagination
             v-model="currentPage"
-            :length="6"
+            :length="this.allPlayers.length"
+            :total-visible="7"
             @input="selectFilter()"
           ></v-pagination>
         </div>
@@ -143,10 +144,11 @@
          items: [...Array(4)].map((_, i) => `Item ${i}`),
        },
        players: [],
-       filters: ["none"],
+       filters: ["NONE"],
        currentPage: 1,
+       allPlayers: [],
        player: "",
-       selectedFilter: 'None'
+       selectedFilter: 'NONE'
      }),
      mounted () {
        this.getFilters()
@@ -164,6 +166,9 @@
             this.players =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter).then(response => {
                                                                                       return response.data;
                                                                                   });
+            this.allPlayers = await http.get("/api/v1/rush/getCsv/?filter="+this.selectedFilter+"&&player="+this.player).then(response => {
+                                                                                                          return response.data;
+                                                                                                          });
             this.loading = false;
        },
        selectFilter(filter) {
@@ -177,13 +182,13 @@
           this.getPlayers();
        },
        async downloadCsv () {
-          this.players =   await http.get("/api/v1/rush/getCsv/?filter="+this.selectedFilter+"&&player="+this.player).then(response => {
+           var currentSet =   await http.get("/api/v1/rush/getCsv/?filter="+this.selectedFilter+"&&player="+this.player).then(response => {
                                                                   return response.data;
                                                               });
-           const url = window.URL.createObjectURL(new Blob([this.players]));
+           const url = window.URL.createObjectURL(new Blob([currentSet]));
            const link = document.createElement('a');
            link.href = url;
-           link.setAttribute('download', 'file.csv');
+           link.setAttribute('download', 'rushing.csv');
            document.body.appendChild(link);
            link.click();
        }

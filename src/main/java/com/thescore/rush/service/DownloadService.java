@@ -39,7 +39,7 @@ public class DownloadService {
             }
             csvPrinter.close();
         } catch (IOException e) {
-            logger.error("Failed to download CSV file: " + e);
+            logger.error("Failed to download CSV file: " + e.getMessage());
         }
     }
 }

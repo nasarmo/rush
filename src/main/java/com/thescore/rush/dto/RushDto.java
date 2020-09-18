@@ -159,29 +159,4 @@ public class RushDto {
         this.fumbles = fumbles;
     }
 
-    public List<RushDto> mapToDto(List<Rush> rushes){
-        List<RushDto> rushDtos = new ArrayList<>();
-        for (Rush rush : rushes){
-            RushDto rushDto = new RushDto();
-            rushDto.setAttempt(rush.getAttempt());
-            rushDto.setAttemptPerGame(rush.getAttemptPerGame());
-            rushDto.setAverage(rush.getAverage());
-            rushDto.setFirstDown(rush.getFirstDown());
-            rushDto.setFirstDownPercentage(rush.getFirstDownPercentage());
-            rushDto.setFourtyYardsPlus(rush.getFourtyYardsPlus());
-            rushDto.setFumbles(rush.getFumbles());
-            rushDto.setPlayer(rush.getPlayer());
-            rushDto.setPosition(rush.getPosition());
-            rushDto.setTeam(rush.getTeam());
-            rushDto.setLongest(rush.getLongest());
-            rushDto.setTwentyYardsPlus(rush.getTwentyYardsPlus());
-            rushDto.setYardsPerGame(rush.getYardsPerGame());
-            rushDto.setFourtyYardsPlus(rush.getFourtyYardsPlus());
-            rushDto.setLongest(rush.getLongest());
-            rushDto.setTouchDowns(rush.getTouchDowns());
-            rushDto.setTotalYards(rush.getTotalYards());
-            rushDtos.add(rushDto);
-        }
-        return rushDtos;
-    }
 }

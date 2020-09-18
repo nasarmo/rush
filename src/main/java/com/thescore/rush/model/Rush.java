@@ -10,35 +10,20 @@ public class Rush {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @JsonProperty("Player")
     String player;
-    @JsonProperty("Team")
     String team;
-    @JsonProperty("Pos")
     Position position;
-    @JsonProperty("Att")
     Integer attempt;
-    @JsonProperty("Att/G")
     double attemptPerGame;
-    @JsonProperty("Yds")
     String totalYards;
-    @JsonProperty("Avg")
     double average;
-    @JsonProperty("Yds/G")
     double yardsPerGame;
-    @JsonProperty("TD")
     Integer touchDowns;
-    @JsonProperty("Lng")
     String longest;
-    @JsonProperty("1st")
     Integer firstDown;
-    @JsonProperty("1st%")
     double firstDownPercentage;
-    @JsonProperty("20+")
     Integer twentyYardsPlus;
-    @JsonProperty("40+")
     Integer fourtyYardsPlus;
-    @JsonProperty("FUM")
     Integer fumbles;
 
     public long getId() {
