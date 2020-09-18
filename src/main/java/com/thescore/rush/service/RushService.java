@@ -3,10 +3,10 @@ package com.thescore.rush.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thescore.rush.dto.RushDto;
+import com.thescore.rush.dto.RushResponse;
 import com.thescore.rush.model.Filter;
 import com.thescore.rush.model.Rush;
 import com.thescore.rush.repository.RushRepository;
-import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.List;
 public class RushService {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(RushService.class);
 
 
     @Autowired
@@ -56,16 +56,25 @@ public class RushService {
         return filters;
     }
 
-    public List<RushDto> getFilterData(Filter filter, String order, String player, Integer page, Integer size){
+    public RushResponse getFilterData(Filter filter, String order, String player, Integer page, Integer size){
+        Integer totalData = (int) rushRepository.count();
+        List<RushDto> rushes;
         if (size == null)
-            size = (int) rushRepository.count();
+            size = totalData;
         if (player == null || player.isEmpty()) {
             if (filter != null && !filter.equals(Filter.NONE)) {
-                return rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size, Sort.by(getSortDirection(order), filter.getLabel()))).getContent());
+                rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size, Sort.by(getSortDirection(order), filter.getLabel()))).getContent());
             } else
-                return rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size)).getContent());
+                rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size)).getContent());
+        } else {
+            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerIgnoreCase(player));
         }
-        return rushMapperDto.mapToDto(rushRepository.findByPlayerIgnoreCase(player));
+
+        if(rushes.size() <= 1)
+            totalData = 1;
+        else
+            totalData = totalData / size;
+        return new RushResponse(rushes, totalData);
     }
 
     private Sort.Direction getSortDirection(String order){

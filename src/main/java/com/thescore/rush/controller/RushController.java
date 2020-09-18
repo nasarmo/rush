@@ -1,6 +1,7 @@
 package com.thescore.rush.controller;
 
 import com.thescore.rush.dto.RushDto;
+import com.thescore.rush.dto.RushResponse;
 import com.thescore.rush.model.Filter;
 import com.thescore.rush.service.DownloadService;
 import com.thescore.rush.service.RushService;
@@ -23,7 +24,7 @@ public class RushController {
     private DownloadService downloadCsv;
 
     @RequestMapping(value="/", method = RequestMethod.GET)
-    public @ResponseBody List<RushDto> getRush(@RequestParam(required = false) Filter filter, @RequestParam(required = false) String order,
+    public @ResponseBody RushResponse getRush(@RequestParam(required = false) Filter filter, @RequestParam(required = false) String order,
                                             @RequestParam(required = false) String player, @RequestParam(defaultValue = DEFAULT_PAGE) int page,
                                                @RequestParam(defaultValue = DEFAULT_SIZE) int size){
         return rushService.getFilterData(filter, order, player, page, size);
@@ -32,8 +33,8 @@ public class RushController {
     @RequestMapping(value="/getCsv", method = RequestMethod.GET)
     public void downloadCsv(HttpServletResponse httpServletResponse, @RequestParam(required = false) Filter filter, @RequestParam(required = false) String order,
                             @RequestParam(required = false) String player){
-        List<RushDto> rushDto = rushService.getFilterData(filter, order, player, 0, null);
-        downloadCsv.downloadCsv(httpServletResponse, rushDto);
+        RushResponse rushResponse = rushService.getFilterData(filter, order, player, 0, null);
+        downloadCsv.downloadCsv(httpServletResponse, rushResponse.getRushDtos());
     }
 
     @RequestMapping(value="/getFilters", method = RequestMethod.GET)

@@ -1,7 +1,6 @@
 package com.thescore.rush.service;
 
 import com.thescore.rush.dto.RushDto;
-import javafx.application.Application;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ import java.util.List;
 @Service
 public class DownloadService {
 
-    private static final Logger logger= LoggerFactory.getLogger(Application.class);
+    private static final Logger logger= LoggerFactory.getLogger(DownloadService.class);
     private static final String FILE_NAME = "rushSet.csv";
 
     public void downloadCsv(HttpServletResponse response, List<RushDto> rushes) {

@@ -114,14 +114,12 @@
             class="elevation-1"
             ></v-data-table>
       </div>
-      <div class="text-center">
           <v-pagination
             v-model="currentPage"
-            :length="this.allPlayers.length"
+            :length="sizeOfPlayers"
             :total-visible="7"
             @input="selectFilter()"
           ></v-pagination>
-        </div>
    </v-app>
 </template>
 <script>
@@ -146,7 +144,7 @@
        players: [],
        filters: ["NONE"],
        currentPage: 1,
-       allPlayers: [],
+       sizeOfPlayers: 0,
        player: "",
        selectedFilter: 'NONE'
      }),
@@ -163,12 +161,11 @@
        },
        async getPlayers(){
             this.loading = true;
-            this.players =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter).then(response => {
+            var rushData =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter).then(response => {
                                                                                       return response.data;
-                                                                                  });
-            this.allPlayers = await http.get("/api/v1/rush/getCsv/?filter="+this.selectedFilter+"&&player="+this.player).then(response => {
-                                                                                                          return response.data;
-                                                                                                          });
+                                                                         });
+            this.players = rushData.rushDtos;
+            this.sizeOfPlayers = rushData.sizeOfPlayers;
             this.loading = false;
        },
        selectFilter(filter) {

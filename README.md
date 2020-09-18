@@ -1,10 +1,10 @@
-## Local Setup Instructions:
+## Local Setup Docker Instructions:
 
 1)'mvn clean install'
 
 2)'cd ui && npm install && npm run build'
 
-3)make sure you are in root directory 'rush'
+3)make sure you are in root directory 'cd  ..'
 
 4)'docker build -t thescore-rush .'
 
@@ -12,6 +12,12 @@
 
 6)in browser - hit localhost:8080/
 
+## Local Setup
+
+1. `npm install -g @vue/cli` used to set up vue cli
+2. `cd ui` moves you to ui folder
+3. `vue add vuetify` adds veutify to ui
+4. `npm run serve` runs the UI  
 
 
 ## Welcome to...The rush!
