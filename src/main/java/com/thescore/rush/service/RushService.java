@@ -7,7 +7,6 @@ import com.thescore.rush.model.Rush;
 import com.thescore.rush.repository.RushRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,27 +23,11 @@ public class RushService {
         return rushRepository.findAll();
     }
 
-    public List<Rush> getPlayer(String player){
-        return rushRepository.findByPlayerIgnoreCase(player);
-    }
-
     public List<Rush> getAllFromJson() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Rush> rushes =  objectMapper.readValue(new ClassPathResource("rushing.json").getInputStream(), new TypeReference<List<Rush>>(){});
         rushRepository.saveAll(rushes);
         return rushes;
-    }
-
-    public List<Rush> getPlayersByTotalYards(){
-        return rushRepository.findAll(Sort.by(Sort.Direction.ASC, "totalYards"));
-    }
-
-    public List<Rush> getPlayersByLongestRush(){
-        return rushRepository.findAll(Sort.by(Sort.Direction.ASC, "longest"));
-    }
-
-    public List<Rush> getPlayersByTotalTouchdowns(){
-        return rushRepository.findAll(Sort.by(Sort.Direction.ASC, "touchDowns"));
     }
 
     public List<String> getFilters(){

@@ -109,10 +109,18 @@
             :items="players"
             :options.sync="options"
             :items-per-page="5"
+            hide-default-footer
             :loading="loading"
             class="elevation-1"
             ></v-data-table>
       </div>
+      <div class="text-center">
+          <v-pagination
+            v-model="currentPage"
+            :length="6"
+            @input="selectFilter()"
+          ></v-pagination>
+        </div>
    </v-app>
 </template>
 <script>
@@ -129,62 +137,47 @@
        ],
        loading: false,
        options: {
-         page: 1,
+         page: 0,
          itemsPerPage: 10,
-         sortBy: ['name'],
-         sortDesc: [true],
-         btns: [
-           ['Sort By', '0'],
-         ],
          colors: ['deep-purple accent-4', 'error', 'teal darken-1'],
          items: [...Array(4)].map((_, i) => `Item ${i}`),
        },
        players: [],
-       filters: [],
-       selectedFilter: 'No filter'
+       filters: ["none"],
+       currentPage: 1,
+       player: "",
+       selectedFilter: 'None'
      }),
      mounted () {
        this.getFilters()
        this.getPlayers()
-       this.$vuetify.theme.dark = true;
 
      },
      methods: {
-       async getPlayers () {
-          this.loading = true
-          this.players =   await http.post("/loadFromJson").then(response => {
-                                                                  return response.data;
-                                                              });
-          this.loading = false;
-       },
        async getFilters () {
-          this.filters =  await http.get("/getFilters").then(response => {
+          this.filters =  await http.get("/api/v1/rush/getFilters").then(response => {
                                                                                                  return response.data;
                                                                                              });
        },
-       async selectFilter(filter) {
-           this.loading = true;
-           this.players =   await http.get("/"+filter).then(response => {
-                                                                          return response.data;
-                                                                      });
-           this.selectedFilter = filter;
-           this.loading = false;
+       async getPlayers(){
+            this.loading = true;
+            this.players =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter).then(response => {
+                                                                                      return response.data;
+                                                                                  });
+            this.loading = false;
        },
-       async searchPlayer (name) {
-          this.loading = true
-          if (name == ""){
-                 this.players =   await http.post("/loadFromJson").then(response => {
-                                                                         return response.data;
-                                                                     });
-          } else {
-                  this.players =   await http.get("/getPlayer?player="+name).then(response => {
-                                                                  return response.data;
-                                                              });
-          }
-          this.loading = false;
+       selectFilter(filter) {
+           if (filter){
+                 this.selectedFilter = filter;
+           }
+           this.getPlayers();
+       },
+       searchPlayer (name) {
+          this.player = name;
+          this.getPlayers();
        },
        async downloadCsv () {
-          this.players =   await http.post("/getCsv", this.players).then(response => {
+          this.players =   await http.get("/api/v1/rush/getCsv/?filter="+this.selectedFilter+"&&player="+this.player).then(response => {
                                                                   return response.data;
                                                               });
            const url = window.URL.createObjectURL(new Blob([this.players]));

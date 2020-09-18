@@ -6,11 +6,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Properties;
+
 @SpringBootApplication
 public class RushApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RushApplication.class, args);
+		Properties properties = new Properties();
+		SpringApplication app = new SpringApplication(RushApplication.class);
+		properties.setProperty("spring.resources.static-locations", "file:/app/ui/");
+		app.setDefaultProperties(properties);
+		app.run(args);
 	}
 
 	@Configuration

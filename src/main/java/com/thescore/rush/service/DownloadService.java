@@ -1,10 +1,11 @@
 package com.thescore.rush.service;
 
-import com.thescore.rush.model.Rush;
-import com.thescore.rush.repository.RushRepository;
+import com.thescore.rush.dto.RushDto;
+import javafx.application.Application;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -16,27 +17,29 @@ import java.util.List;
 @Service
 public class DownloadService {
 
-    @Autowired
-    RushRepository rushRepository;
+    private static final Logger logger= LoggerFactory.getLogger(Application.class);
+    private static final String FILE_NAME = "rushSet.csv";
 
-    public void downloadCsv(HttpServletResponse response, List<Rush> rushes) {
-        String filename = "rushSet.csv";
+    public void downloadCsv(HttpServletResponse response, List<RushDto> rushes) {
+
+        logger.debug("Downloading CSV for %s rows of players" , rushes.size());
+
         try {
             response.setContentType("text/csv");
             response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + filename + "\"");
+                    "attachment; filename=\"" + FILE_NAME + "\"");
             CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(),
                     CSVFormat.DEFAULT.withHeader("Player","Team","Pos","Att/G","Att","Yds","Avg","Yds/G","TD",
                             "Lng","1st","1st%","20+", "40+", "FUM"
                     ));
-            for (Rush rush : rushes) {
+            for (RushDto rush : rushes) {
                 csvPrinter.printRecord(Arrays.asList(rush.getPlayer(), rush.getTeam(),rush.getPosition(),rush.getAttemptPerGame(),rush.getAttempt(),
                         rush.getTotalYards(),rush.getAverage(),rush.getYardsPerGame(),rush.getTouchDowns(),
                         rush.getLongest(),rush.getFirstDown(),rush.getTwentyYardsPlus(),rush.getFourtyYardsPlus(),rush.getFumbles()));
             }
             csvPrinter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to download CSV file: " + e);
         }
     }
 }
