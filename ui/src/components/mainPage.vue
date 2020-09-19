@@ -89,7 +89,7 @@
                       </v-menu>
                   <v-col cols="12">
                      <v-text-field
-                        v-model="fullFilter"
+                        v-model="selectedFilter"
                         outlined
                         label="Selected Filter"
                         type="text"
@@ -172,8 +172,7 @@
        currentPage: 1,
        sizeOfPlayers: 0,
        player: "",
-       selectedFilter: 'NONE',
-       fullFilter: this.selectedFilter + " // " + this.selectedDirection
+       selectedFilter: 'NONE'
      }),
      mounted () {
        this.getFilters()
@@ -206,7 +205,7 @@
                 this.selectedDirection = direction;
            }
            this.getPlayers();
-       },
+       }
        searchPlayer (name) {
           this.player = name;
           this.getPlayers();
