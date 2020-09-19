@@ -1,0 +1,19 @@
+[
+  {
+    "player":"bruce wayne",
+    "team":"JAX",
+    "position":"RB",
+    "attempt":2,
+    "attemptPerGame":2,
+    "totalYards":7,
+    "average":3.5,
+    "yardsPerGame":7,
+    "touchDowns":0,
+    "longest":"7",
+    "firstDown":0,
+    "firstDownPercentage":0,
+    "twentyYardsPlus":0,
+    "fourtyYardsPlus":0,
+    "fumbles":0
+  }
+]

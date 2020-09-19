@@ -34,8 +34,12 @@ public class RushService {
     public List<Rush> getPlayers(){
         return rushRepository.findAll();
     }
-
-    public List<Rush> getAllFromJson() {
+    
+    /**
+     * Save all players to mem DB from a json file found in resource folder 'rushing.json'
+     * @return list of Rush that were just saved from the json file
+     */
+    public List<Rush> saveAllFromJson() {
         List<Rush> rushes = new ArrayList<>();
         try {
             rushes = rushMapperDto.mapFromDto(objectMapper.readValue(new ClassPathResource("rushing.json").getInputStream(), new TypeReference<List<RushDto>>() {
@@ -46,7 +50,11 @@ public class RushService {
         }
         return rushes;
     }
-
+    
+    /**
+     * Get a list of all filters from Filter enum class. Example: TOTAL_YARDS or NONE
+     * @return list of Filters
+     */
     public List<Filter> getFilters(){
         List<Filter> filters = new ArrayList<>();
         Filter[] filterArr = Filter.class.getEnumConstants();
@@ -55,7 +63,16 @@ public class RushService {
         }
         return filters;
     }
-
+    
+    /**
+     * Filter the rush data using different inputs
+     * @param filter how to sort the data. Example by TOTAL_YARDS or NONE
+     * @param order sort them in assending or descending order
+     * @param player name of a specific player to search, if empty return all
+     * @param page the current page
+     * @param size the size of the page
+     * @return the filtered down rush dataset
+     */
     public RushResponse getFilterData(Filter filter, String order, String player, Integer page, Integer size){
         Integer totalData = (int) rushRepository.count();
         List<RushDto> rushes;
@@ -76,7 +93,12 @@ public class RushService {
             totalData = totalData / size;
         return new RushResponse(rushes, totalData);
     }
-
+    
+    /**
+     * get Sort of ASC or DESC order given a string
+     * @param order
+     * @return Sort direction
+     */
     private Sort.Direction getSortDirection(String order){
         if (order != null && order.equalsIgnoreCase("Desc")) {
             return  Sort.Direction.DESC;

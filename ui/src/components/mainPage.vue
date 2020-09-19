@@ -114,12 +114,12 @@
             class="elevation-1"
             ></v-data-table>
       </div>
-          <v-pagination
-            v-model="currentPage"
-            :length="sizeOfPlayers"
-            :total-visible="7"
-            @input="selectFilter()"
-          ></v-pagination>
+      <v-pagination
+         v-model="currentPage"
+         :length="sizeOfPlayers"
+         :total-visible="7"
+         @input="selectFilter()"
+         ></v-pagination>
    </v-app>
 </template>
 <script>

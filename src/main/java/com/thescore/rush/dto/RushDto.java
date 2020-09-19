@@ -2,10 +2,6 @@ package com.thescore.rush.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thescore.rush.model.Position;
-import com.thescore.rush.model.Rush;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RushDto {
     @JsonProperty("Player")

@@ -18,7 +18,12 @@ public class DownloadService {
 
     private static final Logger logger= LoggerFactory.getLogger(DownloadService.class);
     private static final String FILE_NAME = "rushSet.csv";
-
+    
+    /**
+     * Retreives a list of rushDto's and saves them all in CSV format to a file
+     * @param response HttpServletResponse response
+     * @param rushes list of rushDto's to create CSV from
+     */
     public void downloadCsv(HttpServletResponse response, List<RushDto> rushes) {
 
         logger.debug("Downloading CSV for %s rows of players" , rushes.size());

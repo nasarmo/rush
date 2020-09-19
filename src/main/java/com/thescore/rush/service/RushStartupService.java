@@ -10,10 +10,14 @@ public class RushStartupService {
 
     @Autowired
     RushService rushService;
-
+    
+    /**
+     * Load all the Rush data from a json file in resource folder 'rushing.json'
+     */
     @PostConstruct
     private void loadRushData() {
-        //Can always thread this if the file is very large and is performing slow
-        rushService.getAllFromJson();
+        //Thread this if performing slow
+        rushService.saveAllFromJson();
     }
+    
 }

@@ -1,6 +1,7 @@
 package com.thescore.rush.model;
 
 public enum Filter {
+    
     TOTAL_YARDS("totalYards"), LONGEST("longest"), TOUCH_DOWNS("touchDowns"), NONE("none");
 
     private final String label;
@@ -12,4 +13,5 @@ public enum Filter {
     public String getLabel() {
         return label;
     }
+    
 }

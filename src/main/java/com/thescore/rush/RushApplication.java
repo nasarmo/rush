@@ -26,4 +26,5 @@ public class RushApplication {
 			registry.addMapping("/**").allowedOrigins("*");
 		}
 	}
+	
 }

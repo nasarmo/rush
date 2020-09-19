@@ -153,4 +153,5 @@ public class Rush {
     public void setFumbles(Integer fumbles) {
         this.fumbles = fumbles;
     }
+    
 }

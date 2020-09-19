@@ -27,4 +27,5 @@ public class RushResponse {
     public void setSizeOfPlayers(Integer sizeOfPlayers) {
         this.sizeOfPlayers = sizeOfPlayers;
     }
+    
 }

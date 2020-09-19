@@ -1,6 +1,5 @@
 package com.thescore.rush.controller;
 
-import com.thescore.rush.dto.RushDto;
 import com.thescore.rush.dto.RushResponse;
 import com.thescore.rush.model.Filter;
 import com.thescore.rush.service.DownloadService;
@@ -42,6 +41,5 @@ public class RushController {
     {
         return rushService.getFilters();
     }
-
-
+    
 }

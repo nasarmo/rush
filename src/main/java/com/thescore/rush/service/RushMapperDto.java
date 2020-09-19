@@ -9,7 +9,12 @@ import java.util.List;
 
 @Service
 public class RushMapperDto {
-
+	
+	/**
+	 * Transform a list of Rush to RushDto
+	 * @param rushes list of Rush to transform
+	 * @return list of RushDto
+	 */
     public List<RushDto> mapToDto(List<Rush> rushes){
         List<RushDto> rushDtos = new ArrayList<>();
         for (Rush rush : rushes){
@@ -35,8 +40,13 @@ public class RushMapperDto {
         }
         return rushDtos;
     }
-
-    public List<Rush> mapFromDto(List<RushDto> rushDtos){
+	
+	/**
+	 * Transform a list of RushDto to Rush
+	 * @param rushDtos list of rushDto to transform
+	 * @return list of Rush
+	 */
+	public List<Rush> mapFromDto(List<RushDto> rushDtos){
         List<Rush> rushes = new ArrayList<>();
         for (RushDto rushDto : rushDtos){
             Rush rush = new Rush();
