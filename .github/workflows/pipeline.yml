@@ -16,7 +16,7 @@ jobs:
           java-version: 1.11
 
       - name: Build with Maven
-        run: mvn package
+        run: mvn -B package --file pom.xml
 
       - name: Setup node
         uses: actions/setup-node@v1.1.0
