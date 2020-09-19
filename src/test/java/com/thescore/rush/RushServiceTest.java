@@ -48,6 +48,7 @@ public class RushServiceTest {
 	
 	@Test
 	public void testFilteredData() {
+		rushService.saveAllFromJson();
 		Filter filter = Filter.TOTAL_YARDS;
 		String order = "Asc";
 		String player = "";
@@ -55,9 +56,9 @@ public class RushServiceTest {
 		Integer size = 2;
 		RushResponse response = rushService.getFilterData(filter, order, player, page, size);
 		assertEquals(response.getRushDtos().size(), 2);
-		assertEquals(response.getSizeOfPlayers(), 2);
+		assertEquals(response.getSizeOfPlayers(), 5);
 		assertEquals(response.getRushDtos().get(0).getPlayer(), "Charlie Whitehurst");
-		assertEquals(response.getRushDtos().get(1).getPlayer(), "Breshad Perriman");
+		assertEquals(response.getRushDtos().get(1).getPlayer(), "Charlie Whitehurst");
 	}
 	
 }

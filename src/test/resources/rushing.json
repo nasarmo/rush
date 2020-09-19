@@ -1,6 +1,6 @@
 [
   {
-    "player":"Joe Banyard",
+    "Player":"Joe Banyard",
     "Team":"JAX",
     "Pos":"RB",
     "Att":2,
@@ -17,7 +17,7 @@
     "FUM":0
   },
   {
-    "player":"Shaun Hill",
+    "Player":"Shaun Hill",
     "Team":"MIN",
     "Pos":"QB",
     "Att":5,
@@ -34,7 +34,7 @@
     "FUM":0
   },
   {
-    "player":"Breshad Perriman",
+    "Player":"Breshad Perriman",
     "Team":"BAL",
     "Pos":"WR",
     "Att":1,
@@ -51,7 +51,7 @@
     "FUM":0
   },
   {
-    "player":"Charlie Whitehurst",
+    "Player":"Charlie Whitehurst",
     "Team":"CLE",
     "Pos":"QB",
     "Att":2,
@@ -68,7 +68,7 @@
     "FUM":0
   },
   {
-    "player":"Lance Dunbar",
+    "Player":"Lance Dunbar",
     "Team":"DAL",
     "Pos":"RB",
     "Att":9,
