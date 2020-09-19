@@ -63,6 +63,30 @@
                         </v-list-item>
                      </v-list>
                   </v-menu>
+                     <v-menu>
+                         <template v-slot:activator="{ on: menu, attrs }">
+                            <v-tooltip bottom>
+                               <template v-slot:activator="{ on: tooltip }">
+                                  <v-btn
+                                     color="red"
+                                     dark
+                                     v-bind="attrs"
+                                     v-on="{ ...tooltip, ...menu }"
+                                     >Direction</v-btn>
+                               </template>
+                               <span>Sort by one of these</span>
+                            </v-tooltip>
+                         </template>
+                         <v-list>
+                            <v-list-item
+                               v-for="(item, index) in direction"
+                               :key="index"
+                               @click="selectDirection(item)"
+                               >
+                               <v-list-item-title>{{ item }}</v-list-item-title>
+                            </v-list-item>
+                         </v-list>
+                      </v-menu>
                   <v-col cols="12">
                      <v-text-field
                         v-model="selectedFilter"
@@ -143,6 +167,8 @@
        },
        players: [],
        filters: ["NONE"],
+       direction: ["ASC", "DESC"],
+       selectedDirection: "ASC",
        currentPage: 1,
        sizeOfPlayers: 0,
        player: "",
@@ -161,7 +187,7 @@
        },
        async getPlayers(){
             this.loading = true;
-            var rushData =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter).then(response => {
+            var rushData =   await http.get("/api/v1/rush/?player="+this.player+"&&page="+this.currentPage+"&&filter="+this.selectedFilter+"&&order="+this.selectedDirection).then(response => {
                                                                                       return response.data;
                                                                          });
             this.players = rushData.rushDtos;
@@ -171,6 +197,12 @@
        selectFilter(filter) {
            if (filter){
                  this.selectedFilter = filter;
+           }
+           this.getPlayers();
+       },
+       selectDirection(direction) {
+           if (direction){
+                this.selectedDirection = direction;
            }
            this.getPlayers();
        },
