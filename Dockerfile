@@ -1,5 +1,5 @@
 FROM java:8-jdk
-EXPOSE 8080
+EXPOSE 8089
 RUN mkdir -p /app/
 
 ADD target/rush-0.0.1-SNAPSHOT.jar /app/rush-0.0.1-SNAPSHOT.jar
