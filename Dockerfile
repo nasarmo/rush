@@ -7,4 +7,4 @@ ADD ui/dist /app/ui
 WORKDIR /ui
 ENV JAVA_TOOL_OPTIONS="-Xms256m -Xmx512m"
 
-ENTRYPOINT ["java", "-jar", "/app/rush-0.0.1-SNAPSHOT.jar", "--server.port=8089"]
+ENTRYPOINT ["java", "-jar", "/app/rush-0.0.1-SNAPSHOT.jar"]
