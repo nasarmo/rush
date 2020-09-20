@@ -205,7 +205,7 @@
                 this.selectedDirection = direction;
            }
            this.getPlayers();
-       }
+       },
        searchPlayer (name) {
           this.player = name;
           this.getPlayers();
