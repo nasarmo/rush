@@ -42,13 +42,12 @@ public class RushServiceTest {
 		assertEquals(filters.get(0).getLabel(), "totalYards");
 		assertEquals(filters.get(1).getLabel(), "longest");
 		assertEquals(filters.get(2).getLabel(), "touchDowns");
-		assertEquals(filters.get(3).getLabel(), "none");
+		assertEquals(filters.get(3).getLabel(), "id");
 	}
 	
 	
 	@Test
 	public void testFilteredData() {
-		rushService.saveAllFromJson();
 		Filter filter = Filter.TOTAL_YARDS;
 		String order = "Asc";
 		String player = "";
@@ -56,9 +55,22 @@ public class RushServiceTest {
 		Integer size = 2;
 		RushResponse response = rushService.getFilterData(filter, order, player, page, size);
 		assertEquals(response.getRushDtos().size(), 2);
+		assertEquals(response.getSizeOfPlayers(), 2);
+		assertEquals(response.getRushDtos().get(0).getPlayer(), "Joe Banyard");
+		assertEquals(response.getRushDtos().get(1).getPlayer(), "Shaun Hill");
+	}
+	
+	@Test
+	public void testFilteredDataPlayer() {
+		Filter filter = Filter.TOTAL_YARDS;
+		String order = "Asc";
+		String player = "bany";
+		Integer page = 1;
+		Integer size = 2;
+		RushResponse response = rushService.getFilterData(filter, order, player, page, size);
+		assertEquals(response.getRushDtos().size(), 2);
 		assertEquals(response.getSizeOfPlayers(), 5);
-		assertEquals(response.getRushDtos().get(0).getPlayer(), "Charlie Whitehurst");
-		assertEquals(response.getRushDtos().get(1).getPlayer(), "Charlie Whitehurst");
+		assertEquals(response.getRushDtos().get(0).getPlayer(), "Joe Banyard");
 	}
 	
 }

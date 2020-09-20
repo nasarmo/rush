@@ -2,7 +2,7 @@ package com.thescore.rush.model;
 
 public enum Filter {
     
-    TOTAL_YARDS("totalYards"), LONGEST("longest"), TOUCH_DOWNS("touchDowns"), NONE("none");
+    TOTAL_YARDS("totalYards"), LONGEST("longest"), TOUCH_DOWNS("touchDowns"), NONE("id");
 
     private final String label;
 
