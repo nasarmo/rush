@@ -56,7 +56,7 @@ public class RushServiceTest {
 		assertEquals(response.getRushDtos().size(), 2);
 		assertEquals(response.getSizeOfPlayers(), 2);
 		assertEquals(response.getRushDtos().get(0).getPlayer(), "Lance Dunbar");
-		assertEquals(response.getRushDtos().get(1).getPlayer(), "Breshad Perriman");
+		assertEquals(response.getRushDtos().get(1).getPlayer(), "Charlie Whitehurst");
 	}
 	
 	@Test
