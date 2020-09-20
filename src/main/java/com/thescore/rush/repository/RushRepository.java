@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface RushRepository extends JpaRepository<Rush, Long> {
     
-    List<Rush> findByPlayerLike(String player);
+    List<Rush> findByPlayerLikeIgnoreCase(String player);
     List<Rush> findAll();
     List<Rush> findAll(Sort sort);
 

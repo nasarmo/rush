@@ -84,7 +84,7 @@ public class RushService {
             } else
                 rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size)).getContent());
         } else {
-            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerLike("%"+player+"%"));
+            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerLikeIgnoreCase("%"+player+"%"));
         }
 
         if(rushes.size() <= 1)

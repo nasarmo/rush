@@ -20,11 +20,11 @@ built using vue, vuetify, java springboot
 
 2)`cd ui && npm install && npm run build`
 
-3) make sure you are in root directory `cd  ..`
+3)make sure you are in root directory `cd  ..`
 
 4)`docker build -t rush .`
 
 5)`docker run -p8080:8089 rush`
 
-6) hit `localhost:8089/`
+6)hit `localhost:8089/`
 
