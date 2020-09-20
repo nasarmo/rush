@@ -45,11 +45,24 @@ public class RushServiceTest {
 		assertEquals(filters.get(3).getLabel(), "id");
 	}
 	
+	@Test
+	public void testFilteredDataAsc() {
+		Filter filter = Filter.LONGEST;
+		String order = "ASC";
+		String player = "";
+		Integer page = 1;
+		Integer size = 2;
+		RushResponse response = rushService.getFilterData(filter, order, player, page, size);
+		assertEquals(response.getRushDtos().size(), 2);
+		assertEquals(response.getSizeOfPlayers(), 2);
+		assertEquals(response.getRushDtos().get(0).getPlayer(), "Lance Dunbar");
+		assertEquals(response.getRushDtos().get(1).getPlayer(), "Breshad Perriman");
+	}
 	
 	@Test
-	public void testFilteredData() {
+	public void testFilteredDataDesc() {
 		Filter filter = Filter.TOTAL_YARDS;
-		String order = "Asc";
+		String order = "Desc";
 		String player = "";
 		Integer page = 1;
 		Integer size = 2;
