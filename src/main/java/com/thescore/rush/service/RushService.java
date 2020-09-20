@@ -80,11 +80,11 @@ public class RushService {
         if (size == null)
             size = totalData;
 		Pageable pageable;
-        if (filter.equals(Filter.NONE)){
-        	pageable = PageRequest.of(page - 1, size, Sort.by(getSortDirection(order)));
+        if (filter.equals(Filter.NONE)) {
+            pageable = PageRequest.of(page - 1, size, Sort.by(getSortDirection(order), "id"));
 		} else {
         	pageable = PageRequest.of(page - 1, size, Sort.by(getSortDirection(order), filter.getLabel()));
-		}
+        }
         rushes = rushMapperDto.mapToDto(rushRepository.findAllByPlayerLikeIgnoreCase("%"+player+"%", pageable).getContent());
         if(rushes.size() <= 1)
             totalData = 1;
