@@ -191,7 +191,7 @@
                                                                                       return response.data;
                                                                          });
             this.players = rushData.rushDtos;
-            this.sizeOfPlayers = rushData.sizeOfPlayers;
+            this.sizeOfPlayers = rushData.sizeOfPlayers + 1;
             this.loading = false;
        },
        selectFilter(filter) {
