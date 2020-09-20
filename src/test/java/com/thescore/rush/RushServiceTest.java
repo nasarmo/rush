@@ -52,7 +52,7 @@ public class RushServiceTest {
 		Filter filter = Filter.TOTAL_YARDS;
 		String order = "Asc";
 		String player = "";
-		Integer page = 0;
+		Integer page = 1;
 		Integer size = 2;
 		RushResponse response = rushService.getFilterData(filter, order, player, page, size);
 		assertEquals(response.getRushDtos().size(), 2);

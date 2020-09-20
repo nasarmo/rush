@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/v1/rush")
 public class RushController {
 
-    private final static String DEFAULT_PAGE = "0";
+    private final static String DEFAULT_PAGE = "1";
     private final static String DEFAULT_SIZE = "10";
 
     @Autowired

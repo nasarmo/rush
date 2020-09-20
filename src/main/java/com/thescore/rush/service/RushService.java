@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -78,15 +79,8 @@ public class RushService {
         List<RushDto> rushes;
         if (size == null)
             size = totalData;
-        if (player == null || player.isEmpty()) {
-            if (filter != null && !filter.equals(Filter.NONE)) {
-                rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size, Sort.by(getSortDirection(order), filter.getLabel()))).getContent());
-            } else
-                rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size)).getContent());
-        } else {
-            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerLikeIgnoreCase("%"+player+"%"));
-        }
-
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by(getSortDirection(order), filter.getLabel()));
+        rushes = rushMapperDto.mapToDto(rushRepository.findAllByPlayerLikeIgnoreCase("%"+player+"%", pageable).getContent());
         if(rushes.size() <= 1)
             totalData = 1;
         else

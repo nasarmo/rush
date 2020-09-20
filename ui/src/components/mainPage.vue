@@ -168,7 +168,7 @@
        players: [],
        filters: ["NONE"],
        direction: ["ASC", "DESC"],
-       selectedDirection: "ASC",
+       selectedDirection: "DESC",
        currentPage: 1,
        sizeOfPlayers: 0,
        player: "",
