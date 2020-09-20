@@ -84,7 +84,7 @@ public class RushService {
             } else
                 rushes = rushMapperDto.mapToDto(rushRepository.findAll(PageRequest.of(page, size)).getContent());
         } else {
-            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerIgnoreCase(player));
+            rushes = rushMapperDto.mapToDto(rushRepository.findByPlayerLike("%"+player+"%").toList());
         }
 
         if(rushes.size() <= 1)
@@ -100,10 +100,10 @@ public class RushService {
      * @return Sort direction
      */
     private Sort.Direction getSortDirection(String order){
-        if (order != null && order.equalsIgnoreCase("Desc")) {
-            return  Sort.Direction.DESC;
+        if (order != null && order.equalsIgnoreCase("Asc")) {
+            return  Sort.Direction.ASC;
         }
-        return Sort.Direction.ASC;
+        return Sort.Direction.DESC;
     }
 
 }
