@@ -151,7 +151,7 @@
    export default {
      data: () => ({
        headers: [
-             {text: 'Player',align: 'start', sortable: false,value: 'Player',},
+             {text: 'Player',align: 'start', sortable: false,value: 'Player',width: "250px", fixed: true},
              { text: 'Team', value: 'Team',sortable:false },
              { text: 'Position', value: 'Pos' },
              { text: 'Total Rushing Yards', value: 'Yds' },
